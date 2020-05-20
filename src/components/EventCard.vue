@@ -6,19 +6,13 @@
     <div class="event-card -shadow">
       <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
       <h4 class="title">{{ event.title }}</h4>
-      <users-icon />
-      <span>{{ event.attendees.length }} attending</span>
+      <BaseIcon>{{ event.attendees.length }} attending</BaseIcon>
     </div>
   </router-link>
 </template>
 
 <script>
-import { UsersIcon } from 'vue-feather-icons';
-
 export default {
-  components: {
-    UsersIcon,
-  },
   data() {
     return {
       event: {
