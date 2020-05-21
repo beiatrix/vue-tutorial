@@ -44,6 +44,42 @@
       "date": "2019-02-02T23:27:00.000Z",
       "time": "1:00",
       "attendees": []
+    },
+    {
+      "id": 5158226,
+      "user": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "category": "food",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Big Dinner",
+      "description": "Eat some food",
+      "location": "Venice",
+      "date": "2020-05-30T23:18:00.000Z",
+      "time": "2:00",
+      "attendees": []
+    },
+    {
+      "id": 2090554,
+      "user": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "category": "food",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Silly Brunch",
+      "description": "Get loopy breakfast",
+      "location": "LA",
+      "date": "2020-06-19T23:23:00.000Z",
+      "time": "10:00",
+      "attendees": []
     }
   ]
 }
