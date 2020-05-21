@@ -18,5 +18,17 @@ export default new Vuex.Store({
   },
   mutations: {},
   actions: {},
+  getters: {
+    catLength: state => {
+      return state.categories.length;
+    },
+    doneTodos: state => {
+      return state.todos.filter(todo => todo.done);
+    },
+    // can pass in getters object to access a getter in another getter
+    activeTodosCount: (state, getters) => {
+      return state.todos.length - getters.doneTodos.length;
+    },
+  },
   modules: {},
 });
