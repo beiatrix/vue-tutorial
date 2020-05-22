@@ -16,13 +16,9 @@ export default new Vuex.Store({
       'food',
       'community',
     ],
-    events: [
-      { id: 1, title: '...', organizer: '...' },
-      { id: 2, title: '...', organizer: '...' },
-      { id: 3, title: '...', organizer: '...' },
-      { id: 4, title: '...', organizer: '...' },
-    ],
+    events: [],
     eventsTotal: 0,
+    event: {},
   },
   mutations: {
     ADD_EVENT(state, event) {
@@ -33,6 +29,9 @@ export default new Vuex.Store({
     },
     SET_EVENT_TOTAL(state, total) {
       state.eventsTotal = total;
+    },
+    SET_EVENT(state, event) {
+      state.event = event;
     },
   },
   actions: {
@@ -50,6 +49,21 @@ export default new Vuex.Store({
         .catch(err => {
           console.log('Error: ', err.response);
         });
+    },
+    fetchEvent({ commit, getters }, id) {
+      let event = getters.getEventById(id);
+      // prevent us making duplicate API calls
+      if (event) {
+        commit('SET_EVENT', event);
+      } else {
+        EventService.getEvent(id)
+          .then(res => {
+            commit('SET_EVENT', res.data);
+          })
+          .catch(err => {
+            console.log('Error: ', err.response);
+          });
+      }
     },
   },
   getters: {
