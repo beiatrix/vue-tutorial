@@ -1,3 +1,3 @@
 export const state = {
-  user: { id: 'abc123', name: 'Adam Jahr' },
+  user: { id: 'abc123', name: 'Adam' },
 };
