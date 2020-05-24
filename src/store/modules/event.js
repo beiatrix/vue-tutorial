@@ -25,7 +25,13 @@ export const mutations = {
 };
 
 export const actions = {
-  createEvent({ commit }, event) {
+  createEvent({ commit, rootState }, event) {
+    // can access another module's state
+    console.log('User creating Event is ' + rootState.user.user.name);
+
+    // access another module's actions with dispatch -- import at line 28
+    // dispatch('moduleName/actionToCall', payload, {root: true})
+
     return EventService.postEvent(event).then(() => {
       commit('ADD_EVENT', event);
     });
