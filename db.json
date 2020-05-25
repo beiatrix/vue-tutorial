@@ -312,6 +312,24 @@
       "date": "",
       "time": "5:00",
       "attendees": []
+    },
+    {
+      "id": 6771118,
+      "user": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Get Dog",
+      "description": "get a dog",
+      "location": "Animal Place",
+      "date": "2020-05-02T00:00:00.000Z",
+      "time": "2:00",
+      "attendees": []
     }
   ]
 }

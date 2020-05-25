@@ -39,8 +39,8 @@ export default {
   computed: mapState({
     event: state => state.event.event,
   }),
-  methods: mapActions(['event/fetchEvent']),
-  // alt syntax: mapActions('event', ['fetchEvent'])
+  methods: mapActions('event', ['fetchEvent']),
+  // alt syntax: mapActions(['event/fetchEvent']),
 };
 </script>
 

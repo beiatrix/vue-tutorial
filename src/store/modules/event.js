@@ -25,28 +25,46 @@ export const mutations = {
 };
 
 export const actions = {
-  createEvent({ commit, rootState }, event) {
+  createEvent({ commit, rootState, dispatch }, event) {
     // can access another module's state
     console.log('User creating Event is ' + rootState.user.user.name);
 
     // access another module's actions with dispatch -- import at line 28
     // dispatch('moduleName/actionToCall', payload, {root: true})
 
-    return EventService.postEvent(event).then(() => {
-      commit('ADD_EVENT', event);
-    });
+    return EventService.postEvent(event)
+      .then(() => {
+        commit('ADD_EVENT', event);
+        const notification = {
+          type: 'success',
+          message: 'Your event has been created!',
+        };
+        dispatch('notification/add', notification, { root: true });
+      })
+      .catch(err => {
+        const notification = {
+          type: 'error',
+          message: 'There was a problem creating your event: ' + err.message,
+        };
+        dispatch('notification/add', notification, { root: true });
+        throw err;
+      });
   },
-  fetchEvents({ commit }, { perPage, page }) {
+  fetchEvents({ commit, dispatch }, { perPage, page }) {
     EventService.getEvents(perPage, page)
       .then(res => {
         commit('SET_EVENT_TOTAL', res.headers['x-total-count']);
         commit('SET_EVENTS', res.data);
       })
       .catch(err => {
-        console.log('Error: ', err.response);
+        const notification = {
+          type: 'error',
+          message: 'There was a problem fetching events: ' + err.message,
+        };
+        dispatch('notification/add', notification, { root: true });
       });
   },
-  fetchEvent({ commit, getters }, id) {
+  fetchEvent({ commit, getters, dispatch }, id) {
     let event = getters.getEventById(id);
     // prevent us making duplicate API calls
     if (event) {
@@ -57,7 +75,11 @@ export const actions = {
           commit('SET_EVENT', res.data);
         })
         .catch(err => {
-          console.log('Error: ', err.response);
+          const notification = {
+            type: 'error',
+            message: 'There was a problem fetching event: ' + err.message,
+          };
+          dispatch('notification/add', notification, { root: true });
         });
     }
   },
