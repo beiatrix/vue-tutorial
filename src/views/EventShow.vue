@@ -6,10 +6,14 @@
       <h5>Organized by {{ event.organizer ? event.organizer.name : '' }}</h5>
       <h5>Category: {{ event.category }}</h5>
     </div>
+
     <BaseIcon name="map"><h2>Location</h2></BaseIcon>
+
     <address>{{ event.location }}</address>
+
     <h2>Event details</h2>
     <p>{{ event.description }}</p>
+
     <h2>
       Attendees
       <span class="badge -fill-gradient">{{
@@ -27,27 +31,16 @@
     </ul>
   </div>
 </template>
-
 <script>
-import { mapState } from 'vuex';
-import NProgress from 'nprogress';
-import store from '@/store';
-
 export default {
-  props: ['id'],
-  beforeRouteEnter(routeTo, routeFrom, next) {
-    NProgress.start();
-    store.dispatch('event/fetchEvent', routeTo.params.id).then(() => {
-      NProgress.done();
-      next();
-    });
+  props: {
+    event: {
+      type: Object,
+      required: true,
+    },
   },
-  computed: mapState({
-    event: state => state.event.event,
-  }),
 };
 </script>
-
 <style scoped>
 .location {
   margin-bottom: 0;

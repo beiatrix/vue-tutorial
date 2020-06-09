@@ -69,10 +69,13 @@ export const actions = {
     // prevent us making duplicate API calls
     if (event) {
       commit('SET_EVENT', event);
+      return event;
     } else {
+      // return a promise so .then() will work in router hook
       return EventService.getEvent(id)
         .then(res => {
           commit('SET_EVENT', res.data);
+          return res.data;
         })
         .catch(err => {
           const notification = {
